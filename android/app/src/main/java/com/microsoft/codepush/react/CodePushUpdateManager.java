@@ -168,15 +168,6 @@ public class CodePushUpdateManager {
             URL downloadUrl = new URL(downloadUrlString);
             connection = (HttpURLConnection) (downloadUrl.openConnection());
 
-            if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP &&
-                downloadUrl.toString().startsWith("https")) {
-                try {
-                    ((HttpsURLConnection)connection).setSSLSocketFactory(new TLSSocketFactory());
-                } catch (Exception e) {
-                    throw new CodePushUnknownException("Error set SSLSocketFactory. ", e);
-                }
-            }
-
             connection.setRequestProperty("Accept-Encoding", "identity");
             bin = new BufferedInputStream(connection.getInputStream());
 
